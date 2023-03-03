@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS articles 
+(
+    id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    title varchar(50) NOT NULL,
+    anons varchar(100) NOT NULL,
+    full_text text NOT NULL
+);

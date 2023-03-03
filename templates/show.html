@@ -1,0 +1,15 @@
+{{ define "show" }}
+{{ template "header" }}
+<main role="main" class="inner cover">
+    <h2 class="cover-heading">{{ .Title }}</h2>
+    <p align="left">{{ .FullText }}</p>
+   
+    <p class="lead">
+        <a href="/" class="btn btn-secondary">Back</a>
+    <form action="/delete_article" method="post">
+        <button class="btn btn-secondary">Delete</button>
+    </form>
+</p>
+</main>
+{{ template "footer"}}
+{{ end }}

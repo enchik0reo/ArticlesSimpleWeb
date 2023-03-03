@@ -1,0 +1,17 @@
+{{ define "index" }}
+{{ template "header" }}
+<main role="main" class="inner cover">
+    <h3 class="cover-heading">Everything about everything</h3>
+    {{ range . }}
+    <div class="alert alert-secondary">
+        <h3>Article: {{ .Title}}</h3>
+        <p>About: {{ .Anons }}</p>
+        <a href="/post/{{ .Id }}" class="btn btn-dark">Read all</a>
+    </div>
+    {{ else }}
+    <p class="lead">No articles</p>
+    {{ end }}
+    </p>
+</main>
+{{ template "footer"}}
+{{ end }}

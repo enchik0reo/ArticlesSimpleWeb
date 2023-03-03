@@ -1,0 +1,16 @@
+{{ define "create" }}
+{{ template "header" }}
+<main role="main" class="inner cover">
+    <h3 class="cover-heading">Create your article</h3>
+    <form action="/save_article" method="post">
+        <input type="text" name="title" id="title" placeholder="Name"
+class="form-control"><br>
+        <textarea name="anons" id="anons" class="form-control" placeholder="Topic"></textarea><br>
+        <textarea name="full_text" id="full_text" class="form-control" placeholder="Text"></textarea><br>
+        <p class="lead">
+        <button class="btn btn-secondary">Add</button>
+    </p>
+    </form>
+</main>
+{{ template "footer"}}
+{{ end }}
