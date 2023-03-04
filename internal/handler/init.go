@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"ArticlesLittleWeb/internal/repos"
 	"net/http"
+
+	"github.com/enchik0reo/ArticlesLittleWeb/internal/repos"
 
 	"github.com/gorilla/mux"
 )

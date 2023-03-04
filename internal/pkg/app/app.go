@@ -1,9 +1,6 @@
 package app
 
 import (
-	"ArticlesLittleWeb/internal/handler"
-	"ArticlesLittleWeb/internal/repos"
-	"ArticlesLittleWeb/internal/server"
 	"context"
 	"database/sql"
 	"fmt"
@@ -11,6 +8,10 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/enchik0reo/ArticlesLittleWeb/internal/handler"
+	"github.com/enchik0reo/ArticlesLittleWeb/internal/repos"
+	"github.com/enchik0reo/ArticlesLittleWeb/internal/server"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"

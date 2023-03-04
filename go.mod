@@ -1,4 +1,4 @@
-module ArticlesLittleWeb
+module github.com/enchik0reo/ArticlesLittleWeb
 
 go 1.19
 
