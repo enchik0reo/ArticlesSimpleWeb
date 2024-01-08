@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16.1-bullseye
+    restart: always
+    container_name: articles_web
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=qwerty
+     - POSTGRES_DB=articles_db
+    ports:
+     - 5432:5432

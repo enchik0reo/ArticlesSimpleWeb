@@ -3,7 +3,9 @@ package app
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -44,6 +46,7 @@ func New() *App {
 	db, err := repos.NewPostgresDB(repos.Config{
 		Username: viper.GetString("db.username"),
 		Password: os.Getenv("DB_PASSWORD"),
+		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
 		DBName:   viper.GetString("db.dbname"),
 		SSLMode:  viper.GetString("db.sslmode"),
@@ -65,11 +68,13 @@ func New() *App {
 func (a *App) Run() {
 	go func() {
 		if err := a.httpServer.Run(viper.GetString("port"), a.handler.InitRoutes()); err != nil {
-			log.Fatalf("error occurred while running http server: %v", err)
+			if !errors.Is(err, http.ErrServerClosed) {
+				log.Fatalf("error occurred while working http server: %v", err)
+			}
 		}
 	}()
 
-	log.Print("ArticlesApp Successfully Started ")
+	log.Printf("ArticlesApp Successfully Started on port: %s", viper.GetString("port"))
 
 	go func() {
 		for {
@@ -84,15 +89,15 @@ func (a *App) Run() {
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
 
-	log.Print("ArticlesApp Shutting Down ")
-
 	if err := a.httpServer.Shutdown(context.Background()); err != nil {
-		log.Error("error occured on server shutting down: %s", err.Error())
+		log.Errorf("error occured on server shutting down: %s", err.Error())
 	}
 
 	if err := a.db.Close(); err != nil {
-		log.Error("error occured on db connection close: %s", err.Error())
+		log.Errorf("error occured on db connection close: %s", err.Error())
 	}
+
+	log.Print("ArticlesApp Succesfully Shutted Down ")
 }
 
 func initConfig(a *App) error {

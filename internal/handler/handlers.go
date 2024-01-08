@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -41,6 +42,7 @@ func (h *Handler) saveArticle(w http.ResponseWriter, r *http.Request) {
 	} else {
 		err := h.repo.Save(title, anons, fullText)
 		if err != nil {
+			log.Println(err)
 			fmt.Fprintf(w, "Ошибка сохранения статьи")
 		}
 
